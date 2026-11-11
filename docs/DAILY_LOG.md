@@ -2,6 +2,25 @@
 
 Newest first. One entry per working day/session: what was done, decisions, what's next.
 
+## 2026-11-12 — Admin dashboard: data model, services, Filament screens (Phase 2/3)
+Done
+- Branch `feature/admin-dashboard` (stacked on `feature/scaffold`, not pushed).
+- Proposed the data model in `docs/data-model.md` and migrated it: user roles, room_types, rooms, rates, guests, bookings, inquiries.
+- Services: PricingService, AvailabilityService, BookingService, InquiryService.
+- Filament screens for bookings, inquiries, guests (with booking history), room types, rooms, seasonal rates, staff accounts; policies for owner vs staff.
+- Dashboard widgets: today's stats, bookings per month chart, arrivals in the next 7 days.
+- Seeders: room catalogue from the frontend draft; demo guests/bookings/inquiries locally. 66 tests pass, Pint clean.
+
+Decisions
+- Integer BDT, enums for statuses/sources, one room per booking, check-out day is free.
+- Seasonal rate overrides base price; latest-starting rate wins on overlap; no extras yet.
+- Owner-only: staff accounts, rates, room type changes, deletes. App timezone Asia/Dhaka.
+
+Next
+- Arif reviews the data model on the PR and tries the admin locally.
+- Answer room counts / max guests / extra-guest charge questions.
+- Public `/api/v1` endpoints (rooms, availability, quote, inquiry).
+
 ## 2026-11-12 — Backend scaffold (Phase 2 start)
 Done
 - Both repos cloned locally; frontend runs on http://localhost:3000.
