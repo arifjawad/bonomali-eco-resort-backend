@@ -103,6 +103,12 @@ Status flow: `pending → confirmed → checked_in → checked_out`; `pending` o
 - Booking belongsTo Guest, Room, User (`created_by`); hasOne Inquiry (the lead it came from)
 - Inquiry belongsTo Booking
 
+## Rules the services enforce
+- `PricingService`: total = sum of each night's price (seasonal rate if one covers the night, else base price). No extras.
+- `AvailabilityService`: a room is taken on a night when a non-cancelled booking has `check_in <= night < check_out`.
+- `BookingService`: check-out after check-in, room in service, adults + children ≤ `max_guests`, room free; reference generated; total recomputed on every save; status moves only along the flow above.
+- `InquiryService`: only `new` / `contacted` inquiries convert; guest matched by phone, else created; inquiry becomes `converted` with `booking_id`, all in one transaction.
+
 ## Deliberately not in this model yet
 - `booking_items` (several rooms/extras per booking): one room per booking keeps availability and pricing simple. When needed, `bookings.room_id` + `total_amount` move into items.
 - Extras from the frontend calculator (extra guest 1,200/night beyond 2, BBQ 800/guest/night, speedboat 1,500): not priced yet; add as booking items or a pricing rule.
