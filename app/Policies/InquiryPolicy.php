@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Inquiry;
+use App\Models\User;
+
+/**
+ * Staff work the leads; deleting is owner-only.
+ */
+class InquiryPolicy
+{
+    public function viewAny(User $user): bool
+    {
+        return true;
+    }
+
+    public function view(User $user, Inquiry $inquiry): bool
+    {
+        return true;
+    }
+
+    public function create(User $user): bool
+    {
+        return true;
+    }
+
+    public function update(User $user, Inquiry $inquiry): bool
+    {
+        return true;
+    }
+
+    public function delete(User $user, Inquiry $inquiry): bool
+    {
+        return $user->isOwner();
+    }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->isOwner();
+    }
+}
