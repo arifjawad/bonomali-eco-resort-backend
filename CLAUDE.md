@@ -26,6 +26,13 @@ At the end of every working session, append to `docs/DAILY_LOG.md`, tick `docs/T
 - Never commit secrets. Use `.env`; keep `.env.example` current.
 - Prefer simple and shippable over clever. State assumptions.
 
+## Code style
+- Readable over clever: small methods, clear names, no extra abstraction layers. Someone new should follow it at a glance.
+- Service pattern: business logic lives in `app/Services/*Service.php` (e.g. `BookingService`, `PricingService`). Controllers, Filament resources, jobs and seeders stay thin and call a service.
+- Validation in Form Requests; JSON output through API Resources.
+- Don't create a service for trivial code (a one-line response or plain CRUD Filament handles itself).
+- Short comments only where the "why" isn't obvious.
+
 ## Commands
 - Install: `composer install`, then `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate --seed`
 - Test: `php artisan test`
