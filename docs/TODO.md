@@ -7,10 +7,14 @@ Legend: [x] done · [ ] open. Phases per `docs/plan.md`.
 - [x] Tracking docs (BRIDGE, TODO, DAILY_LOG)
 - [ ] Answer open questions (rooms/packages, instant booking vs enquiry, payments, domain/hosting)
 
-## Phase 2 — Booking admin MVP (next)
-- [ ] Scaffold Laravel + Filament, `.env.example`, Docker/dev setup
-- [ ] CI: GitHub Actions (Pint + `php artisan test`)
-- [ ] Users and roles (owner, staff)
+## Phase 2 — Booking admin MVP (in progress)
+- [x] Scaffold Laravel 13 + Filament 5, `.env.example` (SQLite local, MySQL prod)
+- [x] Owner admin user seeded from `.env`
+- [x] `/api/v1` route group + status endpoint, CORS limited to `FRONTEND_URL`, `docs/api.md`
+- [x] CI: GitHub Actions (Pint + `php artisan test`)
+- [ ] Confirm CI green on GitHub once the PR is open
+- [ ] Docker/dev setup (optional: MySQL + Redis locally)
+- [ ] Users and roles (owner, staff); tighten `canAccessPanel()`
 - [ ] room_types, rooms, rates (seasonal pricing) — flag data model before migrating
 - [ ] Booking calendar and availability
 - [ ] Manual bookings + booking_items

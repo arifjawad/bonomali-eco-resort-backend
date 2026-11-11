@@ -26,8 +26,9 @@ At the end of every working session, append to `docs/DAILY_LOG.md`, tick `docs/T
 - Never commit secrets. Use `.env`; keep `.env.example` current.
 - Prefer simple and shippable over clever. State assumptions.
 
-## Commands (fill in after scaffold)
-- Install: `composer install`
+## Commands
+- Install: `composer install`, then `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate --seed`
 - Test: `php artisan test`
-- Style: `./vendor/bin/pint`
-- Dev: `php artisan serve`
+- Style: `./vendor/bin/pint` (CI runs `--test`)
+- Dev: `php artisan serve` (admin at `/admin`, API at `/api/v1`)
+- Stack versions: Laravel 13, Filament 5, Livewire 4. Check `vendor/` source or the package docs before using unfamiliar APIs; Filament 5 differs from older tutorials.
