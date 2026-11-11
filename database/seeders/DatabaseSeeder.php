@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->seedOwner();
+        $this->call(RoomCatalogSeeder::class);
+
+        if (app()->environment('local')) {
+            $this->call(DemoDataSeeder::class);
+        }
     }
 
     /**
@@ -35,7 +41,12 @@ class DatabaseSeeder extends Seeder
 
         User::updateOrCreate(
             ['email' => $email],
-            ['name' => config('bonomali.admin.name'), 'password' => $password],
+            [
+                'name' => config('bonomali.admin.name'),
+                'password' => $password,
+                'role' => UserRole::Owner,
+                'is_active' => true,
+            ],
         );
     }
 }

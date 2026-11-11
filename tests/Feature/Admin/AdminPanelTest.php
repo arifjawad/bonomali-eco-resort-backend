@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\RoomType;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -37,7 +38,21 @@ class AdminPanelTest extends TestCase
 
         $this->seed(DatabaseSeeder::class);
 
-        $this->assertDatabaseHas('users', ['email' => 'owner@example.test']);
+        $this->assertDatabaseHas('users', ['email' => 'owner@example.test', 'role' => 'owner']);
+    }
+
+    public function test_seeder_creates_the_room_catalogue_from_the_frontend_draft(): void
+    {
+        $this->seed(DatabaseSeeder::class);
+        $this->seed(DatabaseSeeder::class); // safe to re-run
+
+        $this->assertSame(
+            [7500, 5500, 9000],
+            RoomType::orderBy('sort_order')->pluck('base_price')->all(),
+        );
+        $this->assertDatabaseCount('rooms', 10);
+        $this->assertDatabaseCount('rates', 1);
+        $this->assertDatabaseCount('bookings', 0); // demo data is local-only
     }
 
     public function test_seeder_skips_owner_when_not_configured(): void
