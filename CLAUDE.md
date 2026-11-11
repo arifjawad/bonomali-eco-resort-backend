@@ -13,6 +13,10 @@ Frontend lives in the separate repo `arifjawad/bonomali-eco-resort` (Next.js).
 Phases 0-3 are build-now. 4-5 are later: design for them, don't build them yet.
 Full plan: `docs/plan.md`. Workflow: `docs/workflow.md`.
 
+## Start here
+Read `docs/BRIDGE.md` first (current state, decisions, next steps), then `docs/TODO.md`.
+At the end of every working session, append to `docs/DAILY_LOG.md`, tick `docs/TODO.md`, refresh `docs/BRIDGE.md`, and push.
+
 ## Rules
 - Work one phase/module at a time; say which phase a change belongs to.
 - Feature branches off `main`; small commits; PR into `main` (use `staging` for pre-prod checks).
